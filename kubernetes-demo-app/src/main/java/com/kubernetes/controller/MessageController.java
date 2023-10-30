@@ -7,9 +7,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import reactor.core.publisher.Flux;
-import java.time.Duration;
+
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.IntStream;
 
 @RestController
 @RequestMapping("/stream")
