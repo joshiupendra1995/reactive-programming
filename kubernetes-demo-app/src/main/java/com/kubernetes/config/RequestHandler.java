@@ -1,4 +1,4 @@
-package com.kubernetes.controller.config;
+package com.kubernetes.config;
 
 import com.kubernetes.model.UserDto;
 import com.kubernetes.service.UserService;
@@ -18,10 +18,10 @@ public class RequestHandler {
     }
 
     public Mono<ServerResponse> userAgeHandler(ServerRequest serverRequest){
-        Optional<String> startAgeOpt = serverRequest.queryParam("startAge");
-        Optional<String> endAgeOpt = serverRequest.queryParam("endAge");
-        if(startAgeOpt.isPresent() && endAgeOpt.isPresent()){
-            return ServerResponse.ok().body(userService.findUsersBetweenAgeFlux(Integer.parseInt(startAgeOpt.get()),Integer.parseInt(endAgeOpt.get())),UserDto.class);
+        String startAgeOpt = serverRequest.pathVariable("startAge");
+        String endAgeOpt = serverRequest.pathVariable("endAge");
+        if(!startAgeOpt.isEmpty() && !endAgeOpt.isEmpty()){
+            return ServerResponse.ok().body(userService.findUsersBetweenAgeFlux(Integer.parseInt(startAgeOpt),Integer.parseInt(endAgeOpt)),UserDto.class);
         }
         return ServerResponse.badRequest().bodyValue(new RuntimeException("No User found"));
     }

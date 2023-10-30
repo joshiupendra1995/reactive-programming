@@ -1,4 +1,4 @@
-package com.kubernetes.controller.config;
+package com.kubernetes.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +21,7 @@ public class RouterConfig {
 
     private RouterFunction<ServerResponse> serverResponseRouterFunction() {
         return RouterFunctions.route()
-                .GET("user/age-between", requestHandler::userAgeHandler)
+                .GET("user/age-between/{startAge}/{endAge}", requestHandler::userAgeHandler)
                 .build();
     }
 
