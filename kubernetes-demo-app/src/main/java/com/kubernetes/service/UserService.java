@@ -28,4 +28,10 @@ public class UserService {
                 .delayElements(Duration.ofSeconds(1))
                 .doOnNext(u->log.info("user :: {}",u));
     }
+
+    public Flux<UserDto> findAllUsersUnder50Years(){
+        Flux<UserDto> userDtoFlux20YearsAge = Flux.fromIterable(List.of(new UserDto(1,"upendra",20),new UserDto(2,"deepa",18)));
+        Flux<UserDto> userDtoFlux50YearsAge = Flux.fromIterable(List.of(new UserDto(3,"ranu",50),new UserDto(4," chita",48)));
+        return Flux.zip(userDtoFlux20YearsAge,userDtoFlux50YearsAge).flatMap(x->Flux.fromIterable(List.of(x.getT1(),x.getT2())));
+    }
 }
